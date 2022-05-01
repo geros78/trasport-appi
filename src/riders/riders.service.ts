@@ -1,11 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm/repository/Repository';
 import { CreateRiderDto } from './dto/create-rider.dto';
 import { UpdateRiderDto } from './dto/update-rider.dto';
+import { Rider } from './entities/rider.entity';
 
 @Injectable()
 export class RidersService {
+  
+  constructor(
+    @InjectRepository(Rider)
+    private riderRepository: Repository<Rider>,
+  ){}
+  
   create(createRiderDto: CreateRiderDto) {
-    return 'This action adds a new rider';
+    const result = this.riderRepository.save(createRiderDto);
+    return result;
   }
 
   findAll() {

@@ -1,11 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateLicenseTypeDto } from './dto/create-license_type.dto';
 import { UpdateLicenseTypeDto } from './dto/update-license_type.dto';
+import { LicenseType } from './entities/license_type.entity';
 
 @Injectable()
 export class LicenseTypesService {
+
+  constructor(
+    @InjectRepository(LicenseType)
+    private license_typeRepository: Repository<LicenseType>,
+  ){}
+
   create(createLicenseTypeDto: CreateLicenseTypeDto) {
-    return 'This action adds a new licenseType';
+    const result = this. license_typeRepository.save(createLicenseTypeDto);
+    return result;
   }
 
   findAll() {

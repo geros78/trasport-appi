@@ -1,11 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateDriverDto } from './dto/create-driver.dto';
 import { UpdateDriverDto } from './dto/update-driver.dto';
+import { Driver } from './entities/driver.entity';
 
 @Injectable()
 export class DriversService {
+
+  constructor(
+    @InjectRepository(Driver)
+    private driverRepository: Repository<Driver>,
+  ){}
+
   create(createDriverDto: CreateDriverDto) {
-    return 'This action adds a new driver';
+    const result = this.driverRepository.save(createDriverDto);
+    return result;
   }
 
   findAll() {

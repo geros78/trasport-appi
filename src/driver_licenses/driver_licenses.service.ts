@@ -1,11 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateDriverLicenseDto } from './dto/create-driver_license.dto';
 import { UpdateDriverLicenseDto } from './dto/update-driver_license.dto';
+import { DriverLicense } from './entities/driver_license.entity';
 
 @Injectable()
 export class DriverLicensesService {
+
+  constructor(
+    @InjectRepository(DriverLicense)
+    private driver_licensesRepository: Repository<DriverLicense>,
+  ){}
+
   create(createDriverLicenseDto: CreateDriverLicenseDto) {
-    return 'This action adds a new driverLicense';
+    const result = this.driver_licensesRepository.save(createDriverLicenseDto);
+    return result;
   }
 
   findAll() {

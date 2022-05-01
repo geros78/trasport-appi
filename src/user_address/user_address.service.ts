@@ -1,11 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserAddressDto } from './dto/create-user_address.dto';
 import { UpdateUserAddressDto } from './dto/update-user_address.dto';
+import { UserAddress } from './entities/user_address.entity';
 
 @Injectable()
 export class UserAddressService {
+
+  constructor(
+    @InjectRepository(UserAddress)
+    private user_addressRepository: Repository<UserAddress>,
+  ){}
+
   create(createUserAddressDto: CreateUserAddressDto) {
-    return 'This action adds a new userAddress';
+    const result = this.user_addressRepository.save(createUserAddressDto);
+    return result;
   }
 
   findAll() {
@@ -24,3 +34,7 @@ export class UserAddressService {
     return `This action removes a #${id} userAddress`;
   }
 }
+function User_Address(User_Address: any) {
+  throw new Error('Function not implemented.');
+}
+
