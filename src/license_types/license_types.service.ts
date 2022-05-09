@@ -19,18 +19,19 @@ export class LicenseTypesService {
   }
 
   findAll() {
-    return `This action returns all licenseTypes`;
+    return this.license_typeRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} licenseType`;
+    return this.license_typeRepository.findOne(id);
   }
 
-  update(id: number, updateLicenseTypeDto: UpdateLicenseTypeDto) {
-    return `This action updates a #${id} licenseType`;
+  async update(id: number, updateUserDto: UpdateLicenseTypeDto) {
+    const result = await this.license_typeRepository.update(id, updateUserDto)
+    return result;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} licenseType`;
+    this.license_typeRepository.delete(id);
   }
 }

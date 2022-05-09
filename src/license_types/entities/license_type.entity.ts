@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { DriverLicense } from "src/driver_licenses/entities/driver_license.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class LicenseType {
@@ -14,4 +15,7 @@ export class LicenseType {
 
     @Column()
     updated_at: Date;
+
+    @OneToMany(()=> DriverLicense,(driver_licenses)=>driver_licenses.license_type_id,{eager:true})
+    driver_licenses:DriverLicense;
 }

@@ -19,18 +19,19 @@ export class DriversService {
   }
 
   findAll() {
-    return `This action returns all drivers`;
+    return this.driverRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} driver`;
+    return this.driverRepository.findOne(id);
   }
 
-  update(id: number, updateDriverDto: UpdateDriverDto) {
-    return `This action updates a #${id} driver`;
+  async update(id: number, updateUserDto: UpdateDriverDto) {
+    const result = await this.driverRepository.update(id, updateUserDto)
+    return result;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} driver`;
+    this.driverRepository.delete(id);
   }
 }

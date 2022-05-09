@@ -19,18 +19,19 @@ export class RidersService {
   }
 
   findAll() {
-    return `This action returns all riders`;
+    return this.riderRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} rider`;
+    return this.riderRepository.findOne(id);
   }
 
-  update(id: number, updateRiderDto: UpdateRiderDto) {
-    return `This action updates a #${id} rider`;
+  async update(id: number, updateUserDto: UpdateRiderDto) {
+    const result = await this.riderRepository.update(id, updateUserDto)
+    return result;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} rider`;
+    this.riderRepository.delete(id);
   }
 }

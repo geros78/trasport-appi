@@ -19,18 +19,19 @@ export class CityService {
   }
 
   findAll() {
-    return `This action returns all city`;
+    return this.cityRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} city`;
+    return this.cityRepository.findOne(id);
   }
 
-  update(id: number, updateCityDto: UpdateCityDto) {
-    return `This action updates a #${id} city`;
+  async update(id: number, updateUserDto: UpdateCityDto) {
+    const result = await this.cityRepository.update(id, updateUserDto)
+    return result;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} city`;
+    this.cityRepository.delete(id);
   }
 }

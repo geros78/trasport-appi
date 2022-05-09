@@ -19,22 +19,21 @@ export class UserAddressService {
   }
 
   findAll() {
-    return `This action returns all userAddress`;
+    return this.user_addressRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} userAddress`;
+    return this.user_addressRepository.findOne(id);
   }
 
-  update(id: number, updateUserAddressDto: UpdateUserAddressDto) {
-    return `This action updates a #${id} userAddress`;
+  async update(id: number, updateUserDto: UpdateUserAddressDto) {
+    const result = await this.user_addressRepository.update(id, updateUserDto)
+    return result;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} userAddress`;
+    this.user_addressRepository.delete(id);
   }
 }
-function User_Address(User_Address: any) {
-  throw new Error('Function not implemented.');
-}
+
 

@@ -19,18 +19,19 @@ export class DriverLicensesService {
   }
 
   findAll() {
-    return `This action returns all driverLicenses`;
+    return this.driver_licensesRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} driverLicense`;
+    return this.driver_licensesRepository.findOne(id);
   }
 
-  update(id: number, updateDriverLicenseDto: UpdateDriverLicenseDto) {
-    return `This action updates a #${id} driverLicense`;
+  async update(id: number, updateUserDto: UpdateDriverLicenseDto) {
+    const result = await this.driver_licensesRepository.update(id, updateUserDto)
+    return result;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} driverLicense`;
+    this.driver_licensesRepository.delete(id);
   }
 }

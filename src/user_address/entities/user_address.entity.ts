@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { City } from "src/city/entities/city.entity";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class UserAddress {
@@ -23,4 +25,10 @@ export class UserAddress {
 
     @Column()
     geolocation: string;
+
+    @ManyToOne(()=> User,(user)=>user.id,{eager:true})
+    user:User;
+
+    @ManyToOne(()=> City,(city)=>city.id, {eager:true})
+    city:City;
 }
