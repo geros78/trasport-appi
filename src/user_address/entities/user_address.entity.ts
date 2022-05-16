@@ -26,9 +26,9 @@ export class UserAddress {
     @Column()
     geolocation: string;
 
-    @ManyToOne(()=> User,(user)=>user.id,{eager:true})
+    @ManyToOne(()=> User,(user)=>user.userAddress)
     user:User;
 
-    @ManyToOne(()=> City,(city)=>city.id, {eager:true})
-    city:City;
+    @ManyToOne(()=> City,(city)=>city.userAddress)
+    cities:City;
 }

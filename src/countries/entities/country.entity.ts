@@ -1,5 +1,5 @@
 import { City } from "src/city/entities/city.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Country {
@@ -10,12 +10,13 @@ export class Country {
     @Column()
     description: string;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     created_at: Date;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     updated_at: Date;
     
-    @OneToMany(()=> City,(city)=>city.country_id, {eager:true})
-    city:City[];
+    @OneToMany(()=> City,(city)=>city.country, {eager:true})
+    @JoinColumn({name: 'country_id'}) 
+    cities:City[];
 }

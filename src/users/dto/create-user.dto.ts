@@ -1,15 +1,10 @@
 import { IsDateString, IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateUserDto {
-
-    @IsNumber()
-    @IsNotEmpty()
-    id: number;
     
     @IsNotEmpty()
     name: string;
 
-    @IsNotEmpty()
     middlename: string;
 
     @IsNotEmpty()

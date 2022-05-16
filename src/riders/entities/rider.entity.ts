@@ -1,5 +1,5 @@
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Rider {
@@ -10,12 +10,12 @@ export class Rider {
     @Column({type:"int4", unique:true})
     user_id: number;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     created_at: Date;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     updated_at: Date;
 
-    @OneToOne(()=> User,(user)=>user.id,{eager:true})
+    @OneToOne(()=> User,(user)=>user.rider,{eager:true})
     user:User
 }

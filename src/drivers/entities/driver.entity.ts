@@ -1,5 +1,6 @@
 import { DriverLicense } from "src/driver_licenses/entities/driver_license.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Driver {
@@ -10,14 +11,17 @@ export class Driver {
     @Column({type:"int4", unique: true})
     user_id: number;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     created_at: Date;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     updated_at: Date;
 
-    @OneToMany(()=> DriverLicense,(driver_licenses)=>driver_licenses.driver_id,{eager:true})
-    driver_licenses:DriverLicense[];
+    @OneToMany(()=> DriverLicense,(driver_licenses)=>driver_licenses.drivers,{eager:true})
+    licenses:DriverLicense[];
+
+    @OneToOne(()=> User,(user)=>user.drivers)
+    user:User;
 
     
 

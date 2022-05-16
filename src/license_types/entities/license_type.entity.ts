@@ -1,5 +1,5 @@
 import { DriverLicense } from "src/driver_licenses/entities/driver_license.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class LicenseType {
@@ -10,12 +10,12 @@ export class LicenseType {
     @Column({type:"varchar"})
     description: string;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     created_at: Date;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     updated_at: Date;
 
-    @OneToMany(()=> DriverLicense,(driver_licenses)=>driver_licenses.license_type_id,{eager:true})
-    driver_licenses:DriverLicense;
+    @OneToMany(()=> DriverLicense,(driver_licenses)=>driver_licenses.licenseTypes,{eager:true})
+    licenses:DriverLicense[];
 }

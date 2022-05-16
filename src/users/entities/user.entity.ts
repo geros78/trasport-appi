@@ -1,7 +1,7 @@
 import { Driver } from "src/drivers/entities/driver.entity";
 import { Rider } from "src/riders/entities/rider.entity";
 import { UserAddress } from "src/user_address/entities/user_address.entity";
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -27,18 +27,18 @@ export class User {
     @Column()
     birthday: Date;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     created_at: Date;
 
-    @Column()
+    @CreateDateColumn({type: "date"})
     updated_at: Date;
 
-    @OneToOne(()=> Rider,(rider)=>rider.user_id,{eager:true})
+    @OneToOne(()=> Rider,(rider)=>rider.user)
     rider:Rider;
 
-    @OneToMany(()=> UserAddress,(user_adress)=>user_adress.user_id,{eager:true})
-    user_adress:UserAddress[];
+    @OneToMany(()=> UserAddress,(user_adress)=>user_adress.user,{eager:true})
+    userAddress:UserAddress[];
 
-    @OneToOne(()=> Driver,(drivers)=>drivers.user_id,{eager:true})
+    @OneToOne(()=> Driver,(drivers)=>drivers.user,{eager:true})
     drivers:Driver;
 }
